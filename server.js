@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -153,12 +155,15 @@ app.get('/api/check', async (req, res) => {
   try {
     const targetUrl = url.startsWith('http') ? url : `https://${url}`;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const timeout = setTimeout(() => controller.abort(), 30000);
     
     const response = await fetch(targetUrl, {
       method: 'GET',
       signal: controller.signal,
       redirect: 'follow',
+      headers: {
+        'User-Agent': 'SecurityHeadersChecker/1.0',
+      },
     });
     
     clearTimeout(timeout);
@@ -217,6 +222,11 @@ app.get('/api/check', async (req, res) => {
     });
     
   } catch (error) {
+    if (error.name === 'AbortError') {
+      return res.status(500).json({
+        error: `Timeout: il sito non ha risposto entro 30 secondi`,
+      });
+    }
     res.status(500).json({
       error: `Errore nell'analisi: ${error.message}`,
     });
