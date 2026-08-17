@@ -160,13 +160,43 @@ app.get('/api/check', async (req, res) => {
     const response = await fetch(targetUrl, {
       method: 'GET',
       signal: controller.signal,
-      redirect: 'follow',
+      redirect: 'manual',
       headers: {
         'User-Agent': 'SecurityHeadersChecker/1.0',
       },
     });
     
     clearTimeout(timeout);
+    
+    // Gestisci redirect (301, 302, ecc.)
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get('location');
+      return res.json({
+        url: targetUrl,
+        statusCode: response.status,
+        score: 0,
+        maxScore: 82,
+        percentage: 0,
+        grade: 'F',
+        headers: [],
+        serverInfo: {
+          server: 'Non rivelato',
+          poweredBy: 'Non presente',
+          contentType: 'Non specificato',
+        },
+        redirect: {
+          status: response.status,
+          location: location,
+          message: `Questo sito reindirizza a ${location}. Analizza l'URL di destinazione.`,
+        },
+      });
+    }
+    
+    if (!response.ok && response.status >= 400) {
+      return res.status(500).json({
+        error: `Il sito ha risposto con status ${response.status}`,
+      });
+    }
     
     const headers = {};
     response.headers.forEach((value, key) => {
@@ -216,15 +246,18 @@ app.get('/api/check', async (req, res) => {
         poweredBy: headers['x-powered-by'] || 'Non presente',
         contentType: headers['content-type'] || 'Non specificato',
       },
-      timing: {
-        responseTime: response.headers.get('x-response-time') || 'N/A',
-      },
+      redirect: null,
     });
     
   } catch (error) {
     if (error.name === 'AbortError') {
       return res.status(500).json({
         error: `Timeout: il sito non ha risposto entro 30 secondi`,
+      });
+    }
+    if (error.message && error.message.includes('redirect')) {
+      return res.status(500).json({
+        error: `Loop di redirect: il sito reindirizza troppo spesso. Prova con l'URL esatto.`,
       });
     }
     res.status(500).json({

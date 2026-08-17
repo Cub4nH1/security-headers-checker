@@ -46,6 +46,12 @@
     }
 
     function displayResults(data) {
+      // Redirect: mostra messaggio e basta
+      if (data.redirect) {
+        showError(`🔄 ${data.redirect.message}`);
+        return;
+      }
+
       // Score
       const scoreCircle = document.getElementById('scoreCircle');
       scoreCircle.textContent = data.grade;
