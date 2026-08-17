@@ -4,44 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🔒 Security Headers Checker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: #1a1a24;
-      --bg-hover: #22222e;
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0b0;
-      --text-muted: #6b6b7b;
-      --accent: #533afd;
-      --accent-hover: #6348ff;
-      --success: #22c55e;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --border: #2a2a3a;
-      --radius: 12px;
-      --radius-sm: 8px;
+      --abyss: #050507;
+      --carbon: #101010;
+      --charcoal: #3d3a39;
+      --signal: #00d992;
+      --mint: #2fd6a1;
+      --snow: #f2f2f2;
+      --parchment: #b8b3b0;
+      --steel: #8b949e;
+      --danger: #fb565b;
+      --warning: #ffba00;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--abyss);
+      color: var(--snow);
       min-height: 100vh;
-      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.4;
     }
 
     /* Header */
     .header {
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 10;
+      background: rgba(5, 5, 7, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--charcoal);
       padding: 1rem 2rem;
       display: flex;
       align-items: center;
@@ -52,19 +57,26 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      font-size: 1.25rem;
-      font-weight: 600;
     }
 
     .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--accent);
-      border-radius: var(--radius-sm);
+      width: 40px;
+      height: 40px;
+      background: var(--carbon);
+      border: 2px solid var(--signal);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.25rem;
+      box-shadow: 0 0 10px rgba(0, 217, 146, 0.3);
+    }
+
+    .logo-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--signal);
     }
 
     .nav-links {
@@ -73,22 +85,22 @@
     }
 
     .nav-links a {
-      color: var(--text-secondary);
+      color: var(--parchment);
       text-decoration: none;
       font-size: 0.875rem;
       font-weight: 500;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--text-primary);
-    }
+    .nav-links a:hover { color: var(--signal); }
 
-    /* Main */
+    /* Main Content */
     .main {
+      position: relative;
+      z-index: 10;
       max-width: 900px;
       margin: 0 auto;
-      padding: 3rem 1.5rem;
+      padding: 4rem 1.5rem;
     }
 
     /* Hero */
@@ -99,29 +111,65 @@
 
     .hero h1 {
       font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span {
+      color: var(--signal);
+      text-shadow: 0 0 20px rgba(0, 217, 146, 0.5);
     }
 
     .hero p {
-      color: var(--text-secondary);
-      font-size: 1.125rem;
+      color: var(--parchment);
+      font-size: 1rem;
       max-width: 500px;
       margin: 0 auto;
     }
 
-    /* Search Box */
-    .search-container {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
+    /* Terminal Box */
+    .terminal {
+      background: var(--carbon);
+      border: 1px solid var(--charcoal);
+      border-radius: 8px;
+      overflow: hidden;
       margin-bottom: 2rem;
     }
 
+    .terminal-header {
+      background: rgba(61, 58, 57, 0.5);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--charcoal);
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27c93f; }
+
+    .terminal-title {
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--steel);
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+    }
+
+    /* Search Input */
     .search-box {
       display: flex;
       gap: 0.75rem;
@@ -129,75 +177,63 @@
 
     .search-input {
       flex: 1;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
+      background: var(--abyss);
+      border: 1px solid var(--charcoal);
+      border-radius: 6px;
       padding: 0.875rem 1rem;
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: inherit;
+      color: var(--snow);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
 
     .search-input:focus {
-      border-color: var(--accent);
+      border-color: var(--signal);
+      box-shadow: 0 0 0 2px rgba(0, 217, 146, 0.1);
     }
 
     .search-input::placeholder {
-      color: var(--text-muted);
+      color: var(--steel);
     }
 
     .btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: var(--radius-sm);
+      background: var(--carbon);
+      color: var(--mint);
+      border: 1px solid var(--signal);
+      border-radius: 6px;
       padding: 0.875rem 1.5rem;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      white-space: nowrap;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .btn:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn:active {
-      transform: scale(0.98);
+      background: var(--signal);
+      color: var(--abyss);
+      box-shadow: 0 0 15px rgba(0, 217, 146, 0.3);
     }
 
     .btn:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
     /* Results */
-    .results {
-      display: none;
-    }
+    .results { display: none; }
+    .results.active { display: block; }
 
-    .results.active {
-      display: block;
-    }
-
-    /* Score Card */
-    .score-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      margin-bottom: 1.5rem;
+    /* Score Display */
+    .score-section {
       text-align: center;
-    }
-
-    .score-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      padding: 2rem;
+      background: var(--carbon);
+      border: 1px solid var(--charcoal);
+      border-radius: 8px;
       margin-bottom: 1.5rem;
     }
 
@@ -210,181 +246,133 @@
       justify-content: center;
       font-size: 2.5rem;
       font-weight: 700;
-      position: relative;
+      margin: 0 auto 1rem;
+      font-family: 'JetBrains Mono', monospace;
     }
 
-    .score-circle.A\+ { background: rgba(34, 197, 94, 0.15); color: var(--success); }
-    .score-circle.A { background: rgba(34, 197, 94, 0.1); color: var(--success); }
-    .score-circle.B { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-    .score-circle.C { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
-    .score-circle.D { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
-    .score-circle.F { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+    .score-circle.A\+ { background: rgba(0, 217, 146, 0.15); color: var(--signal); box-shadow: 0 0 20px rgba(0, 217, 146, 0.3); }
+    .score-circle.A { background: rgba(0, 217, 146, 0.1); color: var(--signal); }
+    .score-circle.B { background: rgba(255, 186, 0, 0.15); color: var(--warning); }
+    .score-circle.C { background: rgba(255, 186, 0, 0.1); color: var(--warning); }
+    .score-circle.D { background: rgba(251, 86, 91, 0.1); color: var(--danger); }
+    .score-circle.F { background: rgba(251, 86, 91, 0.15); color: var(--danger); }
 
-    .score-info h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
+    .score-label {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
-    .score-info p {
-      color: var(--text-secondary);
+    .score-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--steel);
+      word-break: break-all;
     }
 
-    .score-bar {
-      background: var(--bg-primary);
-      border-radius: 999px;
-      height: 8px;
-      overflow: hidden;
-      margin-top: 1rem;
-    }
-
-    .score-bar-fill {
-      height: 100%;
-      border-radius: 999px;
-      transition: width 0.5s ease;
-    }
-
-    .score-bar-fill.high { background: var(--success); }
-    .score-bar-fill.medium { background: var(--warning); }
-    .score-bar-fill.low { background: var(--danger); }
-
-    /* Headers Table */
+    /* Headers List */
     .headers-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      background: var(--carbon);
+      border: 1px solid var(--charcoal);
+      border-radius: 8px;
       overflow: hidden;
+      margin-bottom: 1.5rem;
     }
 
     .section-header {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--charcoal);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .section-header h3 {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 600;
+      color: var(--parchment);
     }
 
     .badge {
-      background: var(--bg-primary);
+      background: var(--abyss);
       padding: 0.25rem 0.75rem;
       border-radius: 999px;
       font-size: 0.75rem;
       font-weight: 500;
-      color: var(--text-secondary);
+      color: var(--steel);
+      border: 1px solid var(--charcoal);
     }
 
     .header-item {
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid var(--charcoal);
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      align-items: flex-start;
+      gap: 0.75rem;
       transition: background 0.2s;
     }
 
-    .header-item:last-child {
-      border-bottom: none;
-    }
+    .header-item:last-child { border-bottom: none; }
+    .header-item:hover { background: rgba(61, 58, 57, 0.2); }
 
-    .header-item:hover {
-      background: var(--bg-hover);
-    }
-
-    .header-status {
-      width: 28px;
-      height: 28px;
+    .status-icon {
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       flex-shrink: 0;
+      margin-top: 0.125rem;
     }
 
-    .header-status.present {
-      background: rgba(34, 197, 94, 0.15);
-      color: var(--success);
+    .status-icon.present {
+      background: rgba(0, 217, 146, 0.15);
+      color: var(--signal);
     }
 
-    .header-status.missing {
-      background: rgba(239, 68, 68, 0.15);
+    .status-icon.missing {
+      background: rgba(251, 86, 91, 0.15);
       color: var(--danger);
     }
 
-    .header-info {
-      flex: 1;
-    }
+    .header-info { flex: 1; }
 
     .header-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
       font-weight: 600;
-      font-size: 0.9375rem;
+      color: var(--snow);
       margin-bottom: 0.125rem;
     }
 
     .header-desc {
-      color: var(--text-secondary);
-      font-size: 0.8125rem;
+      font-size: 0.8rem;
+      color: var(--parchment);
+      line-height: 1.4;
     }
 
     .header-value {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      background: var(--bg-primary);
-      padding: 0.375rem 0.75rem;
-      border-radius: var(--radius-sm);
-      max-width: 300px;
+      font-size: 0.75rem;
+      color: var(--steel);
+      background: var(--abyss);
+      padding: 0.375rem 0.625rem;
+      border-radius: 4px;
+      margin-top: 0.375rem;
+      display: inline-block;
+      max-width: 250px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .header-recommendation {
+    .header-fix {
       font-size: 0.75rem;
-      color: var(--accent);
+      color: var(--mint);
       margin-top: 0.25rem;
-    }
-
-    /* Server Info */
-    .server-info {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .server-info h4 {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.75rem;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .info-item {
-      background: var(--bg-primary);
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-sm);
-    }
-
-    .info-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .info-value {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.875rem;
     }
 
     /* Loading */
@@ -394,104 +382,103 @@
       padding: 3rem;
     }
 
-    .loading.active {
-      display: block;
-    }
+    .loading.active { display: block; }
 
     .spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
+      border: 3px solid var(--charcoal);
+      border-top-color: var(--signal);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       margin: 0 auto 1rem;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading p {
+      color: var(--parchment);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
     }
 
     /* Error */
     .error {
       display: none;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: var(--radius);
-      padding: 1rem 1.5rem;
+      background: rgba(251, 86, 91, 0.1);
+      border: 1px solid rgba(251, 86, 91, 0.3);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
       color: var(--danger);
       margin-bottom: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
     }
 
-    .error.active {
-      display: block;
-    }
+    .error.active { display: block; }
 
     /* Footer */
     .footer {
+      position: relative;
+      z-index: 10;
       text-align: center;
       padding: 2rem;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      border-top: 1px solid var(--border);
+      color: var(--steel);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--charcoal);
       margin-top: 3rem;
     }
 
     .footer a {
-      color: var(--accent);
+      color: var(--signal);
       text-decoration: none;
     }
 
+    .footer a:hover { text-decoration: underline; }
+
     /* Responsive */
     @media (max-width: 640px) {
-      .header {
-        padding: 1rem;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .hero h1 {
-        font-size: 1.75rem;
-      }
-
-      .search-box {
-        flex-direction: column;
-      }
-
-      .score-display {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .header-value {
-        max-width: 150px;
-      }
+      .header { padding: 1rem; flex-direction: column; gap: 1rem; }
+      .hero h1 { font-size: 1.75rem; }
+      .search-box { flex-direction: column; }
+      .header-value { max-width: 150px; }
     }
   </style>
 </head>
 <body>
+  <!-- Animated Background -->
+  <canvas id="bg-canvas"></canvas>
+
   <header class="header">
     <div class="logo">
       <div class="logo-icon">🔒</div>
-      <span>Security Headers Checker</span>
+      <span class="logo-text">sec-headers</span>
     </div>
     <nav class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#api">API</a>
       <a href="https://github.com/Cub4nH1/security-headers-checker" target="_blank">GitHub</a>
     </nav>
   </header>
 
   <main class="main">
     <section class="hero">
-      <h1>Analizza la sicurezza dei tuoi siti web</h1>
-      <p>Verifica gli header HTTP di sicurezza, ottieni un report dettagliato con score e raccomandazioni personalizzate.</p>
+      <h1>Analizza la <span>sicurezza</span> dei tuoi siti</h1>
+      <p>Verifica gli header HTTP e ottieni un report dettagliato con score e raccomandazioni.</p>
     </section>
 
-    <div class="search-container">
-      <div class="search-box">
-        <input type="text" class="search-input" id="urlInput" placeholder="Inserisci un URL (es. example.com)">
-        <button class="btn" id="checkBtn">Analizza</button>
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-title">security-analyzer</span>
+      </div>
+      <div class="terminal-body">
+        <div class="search-box">
+          <input type="text" class="search-input" id="urlInput" placeholder="inserisci URL (es. example.com)">
+          <button class="btn" id="checkBtn">
+            <span>⚡</span> Analizza
+          </button>
+        </div>
       </div>
     </div>
 
@@ -499,42 +486,127 @@
 
     <div class="loading" id="loading">
       <div class="spinner"></div>
-      <p>Analisi in corso...</p>
+      <p>&gt; analisi in corso...</p>
     </div>
 
     <div class="results" id="results">
-      <div class="score-card">
-        <div class="score-display">
-          <div class="score-circle" id="scoreCircle">A+</div>
-          <div class="score-info">
-            <h3 id="scoreText">Security Score</h3>
-            <p id="scorePercent">95% - Eccellente</p>
-          </div>
-        </div>
-        <div class="score-bar">
-          <div class="score-bar-fill high" id="scoreBar" style="width: 95%"></div>
-        </div>
+      <div class="score-section">
+        <div class="score-circle" id="scoreCircle">A+</div>
+        <div class="score-label" id="scoreLabel">Security Score</div>
+        <div class="score-url" id="scoreUrl"></div>
       </div>
 
       <div class="headers-section">
         <div class="section-header">
           <h3>Header di Sicurezza</h3>
-          <span class="badge" id="headerCount">12/15 presenti</span>
+          <span class="badge" id="headerCount">0/15 presenti</span>
         </div>
         <div id="headersList"></div>
-      </div>
-
-      <div class="server-info">
-        <h4>Informazioni Server</h4>
-        <div class="info-grid" id="serverInfo"></div>
       </div>
     </div>
   </main>
 
   <footer class="footer">
-    <p>Creato da <a href="https://github.com/Cub4nH1" target="_blank">Cub4nH1</a> • Open source su <a href="https://github.com/Cub4nH1/security-headers-checker" target="_blank">GitHub</a></p>
+    <p>Creato da <a href="https://github.com/Cub4nH1" target="_blank">Cub4nH1</a> • <a href="https://github.com/Cub4nH1/security-headers-checker" target="_blank">Open Source</a></p>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
   <script src="app.js"></script>
+  <script>
+    // Animated Background - Flow Field
+    const canvas = document.getElementById('bg-canvas');
+    const sketch = (p) => {
+      let particles = [];
+      let flowField = [];
+      let cols, res = 20;
+      let zOff = 0;
+
+      p.setup = () => {
+        p.createCanvas(window.innerWidth, window.innerHeight);
+        p.pixelDensity(1);
+        cols = p.floor(p.width / res);
+        let rows = p.floor(p.height / res);
+        flowField = new Array(cols * rows);
+        for (let i = 0; i < 300; i++) {
+          particles.push(new Particle());
+        }
+        p.background(5, 5, 7);
+      };
+
+      p.draw = () => {
+        p.background(5, 5, 7, 20);
+        let yOff = 0;
+        for (let y = 0; y < p.height; y += res) {
+          let xOff = 0;
+          for (let x = 0; x < p.width; x += res) {
+            let angle = p.noise(xOff, yOff, zOff) * p.TWO_PI * 2;
+            let v = p5.Vector.fromAngle(angle);
+            v.setMag(0.5);
+            flowField[x / res + (y / res) * cols] = v;
+            xOff += 0.1;
+          }
+          yOff += 0.1;
+        }
+        zOff += 0.005;
+
+        for (let particle of particles) {
+          particle.follow(flowField);
+          particle.update();
+          particle.edges();
+          particle.show();
+        }
+      };
+
+      p.windowResized = () => {
+        p.resizeCanvas(window.innerWidth, window.innerHeight);
+        p.background(5, 5, 7);
+      };
+
+      class Particle {
+        constructor() {
+          this.pos = p.createVector(p.random(p.width), p.random(p.height));
+          this.vel = p.createVector(0, 0);
+          this.acc = p.createVector(0, 0);
+          this.maxSpeed = 1.5;
+          this.prevPos = this.pos.copy();
+          this.color = p.random() > 0.7 ? '0, 217, 146' : '47, 214, 161';
+        }
+
+        follow(field) {
+          let x = p.floor(this.pos.x / res);
+          let y = p.floor(this.pos.y / res);
+          let index = x + y * cols;
+          if (field[index]) {
+            let force = field[index].copy();
+            this.applyForce(force);
+          }
+        }
+
+        applyForce(force) { this.acc.add(force); }
+
+        update() {
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.prevPos = this.pos.copy();
+          this.pos.add(this.vel);
+          this.acc.mult(0);
+        }
+
+        edges() {
+          if (this.pos.x > p.width) { this.pos.x = 0; this.prevPos = this.pos.copy(); }
+          if (this.pos.x < 0) { this.pos.x = p.width; this.prevPos = this.pos.copy(); }
+          if (this.pos.y > p.height) { this.pos.y = 0; this.prevPos = this.pos.copy(); }
+          if (this.pos.y < 0) { this.pos.y = p.height; this.prevPos = this.pos.copy(); }
+        }
+
+        show() {
+          p.stroke(this.color, 40);
+          p.strokeWeight(0.5);
+          p.line(this.prevPos.x, this.prevPos.y, this.pos.x, this.pos.y);
+        }
+      }
+    };
+    new p5(sketch, canvas);
+  </script>
 </body>
 </html>
