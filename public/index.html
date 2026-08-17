@@ -545,6 +545,12 @@
         return;
       }
 
+      // Controlla se siamo in file:// (non funziona senza server)
+      if (window.location.protocol === 'file:') {
+        showError('⚠️ Apri questa pagina tramite http://localhost:3000 (avvia prima il server con: node server.js)');
+        return;
+      }
+
       // UI state
       document.getElementById('error').classList.remove('active');
       document.getElementById('results').classList.remove('active');
@@ -562,7 +568,7 @@
 
         displayResults(data);
       } catch (err) {
-        showError('Errore di connessione. Riprova più tardi.');
+        showError('Errore di connessione. Verifica che il server sia avviato su http://localhost:3000');
       } finally {
         document.getElementById('loading').classList.remove('active');
         document.getElementById('checkBtn').disabled = false;
