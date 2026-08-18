@@ -5,10 +5,34 @@
 ![Security Score](https://img.shields.io/badge/security-score%20A%2B-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Version](https://img.shields.io/badge/version-1.0.0-orange)
+[![Get Pro](https://img.shields.io/badge/Get%20Pro-%E2%82%AC9-00d992?style=flat&logo=gumroad&logoColor=white)](https://cub4nh1.gumroad.com/l/security-checker-pro)
 
 ## 🚀 Demo Live
 
 Prova la demo: [security-headers-checker.onrender.com](https://security-headers-checker.onrender.com)
+
+## ⚡ Versione Pro — €9
+
+Questa è la versione **open source e gratuita**. Se ti serve di più, esiste la versione **Pro**:
+
+### 👉 [Security Headers Checker Pro — €9](https://cub4nh1.gumroad.com/l/security-checker-pro)
+
+| Funzionalità | Free (questo repo) | **Pro** |
+|---|:---:|:---:|
+| Analisi 15 header di sicurezza | ✅ | ✅ |
+| Score A+ → F | ✅ | ✅ |
+| Raccomandazioni per header | ✅ | ✅ |
+| **Report PDF professionale** (grafico a torta, barre per categoria, tabella completa, branding) | ❌ | ✅ |
+| **Export CSV** con statistiche e raccomandazioni prioritarie | ❌ | ✅ |
+| **Bulk Scan** fino a 50 domini in una volta | ❌ | ✅ |
+| **Confronto punteggi** tra domini con grafici | ❌ | ✅ |
+| Distribuzione per categoria (Transport, CSP, Cross-Origin…) | ❌ | ✅ |
+| Codice sorgente completo, licenza MIT, self-hosted | ❌ | ✅ |
+| Aggiornamenti a vita | ❌ | ✅ |
+
+Pagamento una volta sola, nessun abbonamento. Perfetto per agenzie, freelance e security researcher che devono consegnare report ai clienti.
+
+**[→ Acquista la Pro a €9](https://cub4nh1.gumroad.com/l/security-checker-pro)**
 
 ## ✨ Features
 
@@ -129,3 +153,5 @@ Distribuito sotto licenza MIT. Vedi [LICENSE](LICENSE) per maggiori informazioni
 ---
 
 ⭐ Se questo progetto ti è utile, lascia una stella!
+
+💎 Ti serve **PDF, CSV e Bulk Scan**? Prendi la [versione Pro a €9](https://cub4nh1.gumroad.com/l/security-checker-pro).
