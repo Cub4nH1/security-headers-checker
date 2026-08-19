@@ -164,3 +164,13 @@ Released under the MIT licence. See [LICENSE](LICENSE) for details.
 ⭐ If you find this project useful, leave a star!
 
 💎 Need **PDF, CSV and bulk scanning**? Get the [Pro version for €9](https://cub4nh1.gumroad.com/l/security-checker-pro).
+
+## 🤖 Telegram Bot
+
+Prova il tool direttamente su Telegram:
+
+[![GradeMySite Bot](https://img.shields.io/badge/Telegram-GradeMySite-blue?style=flat-square&logo=telegram)](https://t.me/GradeMySite_Bot)
+
+Manda un URL al bot e ricevi gratuitamente il punteggio di sicurezza.
+Report PDF professionale disponibile a 100 ⭐.
+
