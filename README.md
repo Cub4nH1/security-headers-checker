@@ -1,102 +1,73 @@
 # 🔒 Security Headers Checker
 
-> Analizza gli header HTTP di qualsiasi sito web e ottieni un report dettagliato con score, raccomandazioni e suggerimenti per migliorare la sicurezza.
+> Analyse the HTTP security headers of any website and get a detailed report with a score, per-header findings and concrete remediation advice.
 
 ![Security Score](https://img.shields.io/badge/security-score%20A%2B-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Version](https://img.shields.io/badge/version-1.0.0-orange)
 [![Get Pro](https://img.shields.io/badge/Get%20Pro-%E2%82%AC9-00d992?style=flat&logo=gumroad&logoColor=white)](https://cub4nh1.gumroad.com/l/security-checker-pro)
 
-## 🚀 Demo Live
+## 🚀 Live Demo
 
-Prova la demo: [security-headers-checker.onrender.com](https://security-headers-checker.onrender.com)
-
-## ⚡ Versione Pro — €9
-
-Questa è la versione **open source e gratuita**. Se ti serve di più, esiste la versione **Pro**:
-
-### 👉 [Security Headers Checker Pro — €9](https://cub4nh1.gumroad.com/l/security-checker-pro)
-
-| Funzionalità | Free (questo repo) | **Pro** |
-|---|:---:|:---:|
-| Analisi 15 header di sicurezza | ✅ | ✅ |
-| Score A+ → F | ✅ | ✅ |
-| Raccomandazioni per header | ✅ | ✅ |
-| **Report PDF professionale** (grafico a torta, barre per categoria, tabella completa, branding) | ❌ | ✅ |
-| **Export CSV** con statistiche e raccomandazioni prioritarie | ❌ | ✅ |
-| **Bulk Scan** fino a 50 domini in una volta | ❌ | ✅ |
-| **Confronto punteggi** tra domini con grafici | ❌ | ✅ |
-| Distribuzione per categoria (Transport, CSP, Cross-Origin…) | ❌ | ✅ |
-| Codice sorgente completo, licenza MIT, self-hosted | ❌ | ✅ |
-| Aggiornamenti a vita | ❌ | ✅ |
-
-Pagamento una volta sola, nessun abbonamento. Perfetto per agenzie, freelance e security researcher che devono consegnare report ai clienti.
-
-**[→ Acquista la Pro a €9](https://cub4nh1.gumroad.com/l/security-checker-pro)**
+Try it: [security-headers-checker.onrender.com](https://security-headers-checker.onrender.com)
 
 ## ✨ Features
 
-- ✅ **Analisi completa** di 15+ header di sicurezza
-- ✅ **Score visuale** (A+ a F) con colori intuitivi
-- ✅ **Raccomandazioni dettagliate** per ogni header mancante
-- ✅ **Tempo di risposta** e informazioni server
-- ✅ **Export PDF** del report
-- ✅ **API REST** per integrazione con CI/CD
-- ✅ **Dark mode** elegante
-
-## 📸 Screenshot
-
-![Demo Preview](demo-screenshot.png)
+- ✅ **Full analysis** of 15 security headers
+- ✅ **Letter score** (A+ to F) with intuitive colours
+- ✅ **Per-header recommendations** explaining what to set and why
+- ✅ **Response time** and server information
+- ✅ **REST API** for CI/CD integration
+- ✅ **Dark mode** interface
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+- **Frontend:** HTML5, CSS3, vanilla JavaScript
 - **Backend:** Node.js + Express
-- **Security:** Helmet, CORS, Rate Limiting
-- **Stile:** Design ispirato a Linear/Vercel
+- **Security:** Helmet, CORS, rate limiting
+- **Design:** inspired by Linear and Vercel
 
 ## 🚀 Quick Start
 
-### Prerequisiti
+### Requirements
 
 - Node.js 18+
-- npm o yarn
+- npm or yarn
 
-### Installazione
+### Installation
 
 ```bash
-# Clona il repository
+# Clone the repository
 git clone https://github.com/Cub4nH1/security-headers-checker.git
 cd security-headers-checker
 
-# Installa le dipendenze
+# Install dependencies
 npm install
 
-# Avvia il server
+# Start the server
 npm start
 
-# Apri http://localhost:3000
+# Open http://localhost:3000
 ```
 
-### Uso da riga di comando
+### Command line usage
 
 ```bash
-# Analizza un URL
-curl http://localhost:3000/api/check?url=https://example.com
+# Analyse a URL
+curl "http://localhost:3000/api/check?url=https://example.com"
 
-# Ottieni solo lo score
-curl http://localhost:3000/api/score?url=https://example.com
+# Get the score only
+curl "http://localhost:3000/api/score?url=https://example.com"
 ```
 
 ## 📚 API Endpoints
 
-| Metodo | Endpoint | Descrizione |
+| Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/check?url={url}` | Analisi completa |
-| GET | `/api/score?url={url}` | Solo score |
-| POST | `/api/check` | Analisi con body JSON |
+| GET | `/api/check?url={url}` | Full analysis |
+| GET | `/api/score?url={url}` | Score only |
 
-## 🔐 Header Analizzati
+## 🔐 Headers Analysed
 
 - `Strict-Transport-Security`
 - `X-Content-Type-Options`
@@ -112,46 +83,75 @@ curl http://localhost:3000/api/score?url=https://example.com
 - `X-Permitted-Cross-Domain-Policies`
 - `X-DNS-Prefetch-Control`
 - `X-Download-Options`
-- `X-Powered-By` (rimozione)
+- `X-Powered-By` (flagged when present — it should be removed)
 
-## 📊 Sistema di Score
+## 📊 Scoring
 
-| Score | Descrizione |
-|-------|-------------|
-| **A+** | 15/15 header presenti |
-| **A** | 12-14 header |
-| **B** | 9-11 header |
-| **C** | 6-8 header |
-| **D** | 3-5 header |
-| **F** | 0-2 header |
+| Score | Meaning |
+|-------|---------|
+| **A+** | 15/15 headers present |
+| **A** | 12-14 headers |
+| **B** | 9-11 headers |
+| **C** | 6-8 headers |
+| **D** | 3-5 headers |
+| **F** | 0-2 headers |
 
-## 🤝 Contribuizione
+## ⚡ Pro version — €9
 
-Le contribuzioni sono benvenute! Leggi [CONTRIBUTING.md](CONTRIBUTING.md) per iniziare.
+This repository is the **free and open-source** version. If you need reporting and bulk features, there is a **Pro** version:
 
-1. Fork il progetto
-2. Crea un branch (`git checkout -b feature/amazing`)
-3. Commit delle modifiche (`git commit -m 'Add amazing feature'`)
+### 👉 [Security Headers Checker Pro — €9](https://cub4nh1.gumroad.com/l/security-checker-pro)
+
+| Feature | Free (this repo) | **Pro** |
+|---|:---:|:---:|
+| Analysis of 15 security headers | ✅ | ✅ |
+| Score A+ → F | ✅ | ✅ |
+| Per-header recommendations | ✅ | ✅ |
+| **Professional PDF report** (pie chart, per-category bars, full table, branding) | ❌ | ✅ |
+| **CSV export** with statistics and prioritised recommendations | ❌ | ✅ |
+| **Bulk scan** of up to 50 domains at once | ❌ | ✅ |
+| **Score comparison** across domains with charts | ❌ | ✅ |
+| Category breakdown (Transport, CSP, Cross-Origin…) | ❌ | ✅ |
+| Full source code, MIT licence, self-hosted | ❌ | ✅ |
+| Lifetime updates | ❌ | ✅ |
+
+One-time payment, no subscription. Built for agencies, freelancers and security researchers who deliver reports to clients.
+
+**[→ Get Pro for €9](https://cub4nh1.gumroad.com/l/security-checker-pro)**
+
+## 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the project
+2. Create a branch (`git checkout -b feature/amazing`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push (`git push origin feature/amazing`)
-5. Apri una Pull Request
+5. Open a Pull Request
 
-## 📝 Licenza
+Found a bug or have an idea? [Open an issue](https://github.com/Cub4nH1/security-headers-checker/issues) or start a [discussion](https://github.com/Cub4nH1/security-headers-checker/discussions).
 
-Distribuito sotto licenza MIT. Vedi [LICENSE](LICENSE) per maggiori informazioni.
+## 💖 Support
 
-## 👨‍💻 Autore
+If this tool is useful to you, you can [sponsor the project on GitHub](https://github.com/sponsors/Cub4nH1). Sponsorships cover hosting and keep the free version online.
+
+## 📝 Licence
+
+Released under the MIT licence. See [LICENSE](LICENSE) for details.
+
+## 👨‍💻 Author
 
 **Jon Nou (Cub4nH1)**
 - GitHub: [@Cub4nH1](https://github.com/Cub4nH1)
-- Twitter: [@cub4nh1](https://twitter.com/cub4nh1)
+- X: [@Cub4nH1](https://x.com/Cub4nH1)
 
-## 🙏 Ringraziamenti
+## 🙏 Acknowledgements
 
-- Ispirato da [securityheaders.com](https://securityheaders.com)
-- Design ispirato a Linear e Vercel
+- Inspired by [securityheaders.com](https://securityheaders.com)
+- Design inspired by Linear and Vercel
 
 ---
 
-⭐ Se questo progetto ti è utile, lascia una stella!
+⭐ If you find this project useful, leave a star!
 
-💎 Ti serve **PDF, CSV e Bulk Scan**? Prendi la [versione Pro a €9](https://cub4nh1.gumroad.com/l/security-checker-pro).
+💎 Need **PDF, CSV and bulk scanning**? Get the [Pro version for €9](https://cub4nh1.gumroad.com/l/security-checker-pro).
