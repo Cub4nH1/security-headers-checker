@@ -11,6 +11,12 @@
 
 Try it: [security-headers-checker.onrender.com](https://security-headers-checker.onrender.com)
 
+> **Note on language:** the web interface and the demo are currently in **Italian**, while the
+> REST API, the JSON responses and this documentation are in English. The API is fully usable
+> without reading the UI. An English interface is planned — see
+> [issue #1](https://github.com/Cub4nH1/security-headers-checker/issues) if you want to follow
+> or help with the translation.
+
 ## ✨ Features
 
 - ✅ **Full analysis** of 15 security headers
