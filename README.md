@@ -87,14 +87,17 @@ curl "http://localhost:3000/api/score?url=https://example.com"
 
 ## 📊 Scoring
 
-| Score | Meaning |
-|-------|---------|
-| **A+** | 15/15 headers present |
-| **A** | 12-14 headers |
-| **B** | 9-11 headers |
-| **C** | 6-8 headers |
-| **D** | 3-5 headers |
-| **F** | 0-2 headers |
+Each header carries a weight based on its security impact, so the score is a weighted
+percentage rather than a plain header count.
+
+| Score | Weighted percentage |
+|-------|---------------------|
+| **A+** | 90-100% |
+| **A** | 80-89% |
+| **B** | 70-79% |
+| **C** | 60-69% |
+| **D** | 50-59% |
+| **F** | below 50% |
 
 ## ⚡ Pro version — €9
 
